@@ -3,6 +3,10 @@ from django.contrib.auth import login
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 
 from .forms import RegisterForm
@@ -10,9 +14,9 @@ from .models import Director, Movie
 
 
 def register(request):
-    '''
+    """
         Register new user with automatic login
-    '''
+    """
     if request.method == "GET":
         return render(
             request, 'registration/register.html',
@@ -38,9 +42,17 @@ class MovieDetailView(DetailView):
 
 class MovieUpdateView(UpdateView):
     model = Movie
-    template_name = 'movies_collection/form.html'
-    fields = '__all__'
+    template_name = 'movies_collection/form_movie_update.html'
+    fields = ['title', 'gender', 'youtube_trailer_url', 'user', 'director']
     success_url = reverse_lazy('movie-list')
+
+    def form_valid(self, form):
+        if self.request.user.is_superuser:
+            form.save()
+        else:
+            form.instance.user = self.request.user
+            form.save()
+        return redirect('movie-list')
 
 
 class MovieDeleteView(DeleteView):
@@ -49,11 +61,20 @@ class MovieDeleteView(DeleteView):
     success_url = reverse_lazy('movie-list')
 
 
+@method_decorator(login_required, name='dispatch')
 class MovieCreateView(CreateView):
+    """
+         Add a new movie model to the database
+        with auto-adding field of the user
+    """
     model = Movie
     template_name = 'movies_collection/movie_form.html'
-    fields = '__all__'
+    fields = ['title', 'gender', 'youtube_trailer_url', 'director']
     success_url = reverse_lazy('movie-list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class DirectorListView(ListView):
@@ -79,6 +100,7 @@ class DirectorDeleteView(DeleteView):
     success_url = reverse_lazy('director-list')
 
 
+@method_decorator(login_required, name='dispatch')
 class DirectorCreateView(CreateView):
     model = Director
     template_name = 'movies_collection/director_form.html'

@@ -20,14 +20,20 @@
             {% for obj in object_list %}
                 <tr>
                     <td><a href="{% url 'director-detail' obj.id %}">{{ obj.director_name }}</a></td>
-                    <td><a href="{% url 'director-edit' obj.id %}">Edit</a></td>
-                    <td><a href="{% url 'director-delete' obj.id %}">Delete</a></td>
+                    {% if user.is_superuser %}
+                        <td><a href="{% url 'director-edit' obj.id %}">Edit</a></td>
+                        <td><a href="{% url 'director-delete' obj.id %}">Delete</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
 
         </tbody>
       </table>
-      <p><a href="/director-create/">New Director</a></p>
+      {% if user.is_authenticated %}
+        <p><a href="/director-create/">New Director</a></p>
+      {% else %}
+        To have access to add new director u need log in
+      {% endif %}
     </div>
     </section>
 {% endblock %}
