@@ -54,3 +54,33 @@ class MovieCreateView(CreateView):
     template_name = 'movies_collection/movie_form.html'
     fields = '__all__'
     success_url = reverse_lazy('movie-list')
+
+
+class DirectorListView(ListView):
+    model = Director
+    template_name = 'movies_collection/director_list.html'
+
+
+class DirectorDetailView(DetailView):
+    model = Director
+    template_name = 'movies_collection/director_detail.html'
+
+
+class DirectorUpdateView(UpdateView):
+    model = Director
+    template_name = 'movies_collection/form.html'
+    fields = '__all__'
+    success_url = reverse_lazy('director-list')
+
+
+class DirectorDeleteView(DeleteView):
+    model = Director
+    template_name = 'movies_collection/confirm_delete.html'
+    success_url = reverse_lazy('director-list')
+
+
+class DirectorCreateView(CreateView):
+    model = Director
+    template_name = 'movies_collection/director_form.html'
+    fields = '__all__'
+    success_url = reverse_lazy('movie-list')
