@@ -9,7 +9,7 @@
 
         <thead>
           <tr>
-            <th>Director</th>
+            <th>Title</th>
             <th></th>
             <th></th>
           </tr>
@@ -19,16 +19,15 @@
 
             {% for obj in object_list %}
                 <tr>
-                    <td><a href="{% url 'movie-detail' obj.id %}">{{ obj.title }}</a></td>
-                    <td><a href="{% url 'movie-edit' obj.id %}">Edit</a></td>
-                    <td><a href="{% url 'movie-delete' obj.id %}">Delete</a></td>
+                    <td><a href="{% url 'director-detail' obj.id %}">{{ obj.director_name }}</a></td>
+                    <td><a href="{% url 'director-edit' obj.id %}">Edit</a></td>
+                    <td><a href="{% url 'director-delete' obj.id %}">Delete</a></td>
                 </tr>
             {% endfor %}
 
         </tbody>
       </table>
-      <p><a href="/movie-create/">New Movie</a></p>
+      <p><a href="/director-create/">New Director</a></p>
     </div>
     </section>
 {% endblock %}
-
