@@ -1,0 +1,34 @@
+{% extends 'movies_collection/base_extends.html' %}
+
+{% block section_one %}
+    <section>
+        <div class="container">
+      <h2>Movies</h2>
+
+      <table class="table table-bordered">
+
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+            {% for obj in object_list %}
+                <tr>
+                    <td><a href="{% url 'movie-detail' obj.id %}">{{ obj.title }}</a></td>
+                    <td><a href="{% url 'movie-edit' obj.id %}">Edit</a></td>
+                    <td><a href="{% url 'movie-delete' obj.id %}">Delete</a></td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+      </table>
+      <p><a href="/movie-create/">New Movie</a></p>
+    </div>
+    </section>
+{% endblock %}
+

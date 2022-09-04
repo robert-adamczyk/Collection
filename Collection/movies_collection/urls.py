@@ -11,4 +11,10 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('login/', LoginView.as_view(), name='login'),
+    # Movie
+    path('movie-list', views.MovieListView.as_view(), name='movie-list'),
+    path('movie/<int:pk>/', views.MovieDetailView.as_view(), name='movie-detail'),
+    path('movie/<int:pk>/edit', views.MovieUpdateView.as_view(), name='movie-edit'),
+    path('movie/<int:pk>/delete', views.MovieDeleteView.as_view(), name='movie-delete'),
+    path('movie-create/', views.MovieCreateView.as_view(), name='movie-create'),
 ]

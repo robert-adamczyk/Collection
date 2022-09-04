@@ -1,0 +1,18 @@
+{% extends 'movies_collection/base_extends.html' %}
+
+{% block section_one %}
+<div class="container">
+    <div class="row justify-content-center">
+                <div class="">
+
+                    <h2>{{ object.title }}</h2>
+                    <p>Gender: <b>{{ object.get_gender_display }}</b>
+                    <p>Trailer: <b><a href="{{ object.youtube_trailer_url }}"> {{ object.youtube_trailer_url }} </a></b>
+                    <p>Director: <b>{{ object.director.director_name }}</b>
+                    <p>Add date: <b>{{ object.date_added }}</b>
+                    <p>Owner: <b>{{ object.user }}</b></p>
+
+                </div>
+    </div>
+</div>
+{% endblock %}

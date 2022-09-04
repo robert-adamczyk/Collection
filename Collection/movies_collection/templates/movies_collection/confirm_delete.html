@@ -1,0 +1,8 @@
+{% extends 'movies_collection/base_extends.html' %}
+
+{% block section_one %}
+    <form action="" method="POST">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input type="submit" value="Confirm" />
+    </form>
+{% endblock %}
