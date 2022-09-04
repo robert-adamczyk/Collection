@@ -19,9 +19,9 @@
 
             {% for obj in object_list %}
                 <tr>
-                    <td><a href="">{{ obj.title }}</a></td>
-                    <td><a href="">Edit</a></td>
-                    <td><a href="">Delete</a></td>
+                    <td><a href="{% url 'movie-detail' obj.id %}">{{ obj.title }}</a></td>
+                    <td><a href="{% url 'movie-edit' obj.id %}">Edit</a></td>
+                    <td><a href="{% url 'movie-delete' obj.id %}">Delete</a></td>
                 </tr>
             {% endfor %}
 
