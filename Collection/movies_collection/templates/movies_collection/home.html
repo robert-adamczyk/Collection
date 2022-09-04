@@ -1,0 +1,6 @@
+{% extends 'movies_collection/base_extends.html' %}
+
+{% block section_one %}
+Hello, {{ user.username|default:'Guest' }} !
+On this page u can add ur movies collection and share with others
+{% endblock %}

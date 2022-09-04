@@ -1,0 +1,14 @@
+{% extends 'movies_collection/base_extends.html' %}
+
+{% block section_one %}
+    <div class="container">
+        <h2>Register</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Register">
+        </form>
+        <a class="btn btn-danger" href="{% url 'login' %}" role="button">Return to Login</a>
+    </div>
+{% endblock %}
