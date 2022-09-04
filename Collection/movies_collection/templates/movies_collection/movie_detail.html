@@ -3,16 +3,25 @@
 {% block section_one %}
 <div class="container">
     <div class="row justify-content-center">
-                <div class="">
+        <div class="">
 
-                    <h2>{{ object.title }}</h2>
-                    <p>Gender: <b>{{ object.get_gender_display }}</b>
-                    <p>Trailer: <b><a href="{{ object.youtube_trailer_url }}"> {{ object.youtube_trailer_url }} </a></b>
-                    <p>Director: <b>{{ object.director.director_name }}</b>
-                    <p>Add date: <b>{{ object.date_added }}</b>
-                    <p>Owner: <b>{{ object.user }}</b></p>
+            <h2>{{ object.title }}</h2>
+            <p>Gender: <b>{{ object.get_gender_display }}</b></p>
+            <p>Trailer: <b><a href="{{ object.youtube_trailer_url }}"> {{ object.youtube_trailer_url }} </a></b></p>
+            <p>Director: <b>{{ object.director.director_name }}</b></p>
+            <p>Add date: <b>{{ object.date_added }}</b></p>
+            <p>Owner: <b>{{ object.user }}</b></p>
 
-                </div>
+        </div>
+            <a href="{% url 'movie-list' %}"> Back to movie list</a>
+        {% if user.is_authenticated %}
+            {% if user.id == object.user.id or user.is_superuser %}
+                <a href="{% url 'movie-edit' object.id %}">Edit</a>
+                <a href="{% url 'movie-delete' object.id %}">Delete</a>
+            {% endif %}
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}
+

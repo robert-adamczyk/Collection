@@ -20,14 +20,20 @@
             {% for obj in object_list %}
                 <tr>
                     <td><a href="{% url 'movie-detail' obj.id %}">{{ obj.title }}</a></td>
-                    <td><a href="{% url 'movie-edit' obj.id %}">Edit</a></td>
-                    <td><a href="{% url 'movie-delete' obj.id %}">Delete</a></td>
+                    {% if user.id == obj.user.id or user.is_superuser %}
+                        <td><a href="{% url 'movie-edit' obj.id %}">Edit</a></td>
+                        <td><a href="{% url 'movie-delete' obj.id %}">Delete</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
 
         </tbody>
       </table>
-      <p><a href="/movie-create/">New Movie</a></p>
+      {% if user.is_authenticated %}
+        <p><a href="/movie-create/"> New Movie </a></p>
+      {% else %}
+        To have access to add new movie u need log in
+      {% endif %}
     </div>
     </section>
 {% endblock %}

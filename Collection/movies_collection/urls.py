@@ -17,7 +17,7 @@ urlpatterns = [
     path('movie/<int:pk>/edit', views.MovieUpdateView.as_view(), name='movie-edit'),
     path('movie/<int:pk>/delete', views.MovieDeleteView.as_view(), name='movie-delete'),
     path('movie-create/', views.MovieCreateView.as_view(), name='movie-create'),
-    # Movie
+    # Director
     path('director-list', views.DirectorListView.as_view(), name='director-list'),
     path('director/<int:pk>/', views.DirectorDetailView.as_view(), name='director-detail'),
     path('director/<int:pk>/edit', views.DirectorUpdateView.as_view(), name='director-edit'),

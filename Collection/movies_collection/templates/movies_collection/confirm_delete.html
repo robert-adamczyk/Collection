@@ -1,8 +1,12 @@
 {% extends 'movies_collection/base_extends.html' %}
 
 {% block section_one %}
-    <form action="" method="POST">{% csrf_token %}
-        <p>Are you sure you want to delete "{{ object }}"?</p>
-        <input type="submit" value="Confirm" />
-    </form>
+    {% if user.id == object.user.id or user.is_superuser %}
+        <form action="" method="POST">{% csrf_token %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+            <input type="submit" value="Confirm" />
+        </form>
+    {% else %}
+        You shouldn't be here (and You know it)
+    {% endif %}
 {% endblock %}
