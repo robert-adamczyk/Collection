@@ -32,7 +32,9 @@
                         {% endif %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'movie-list' %}">Movie-list</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'director-list' %}">Director-list</a></li>
-                            <li class="nav-item"><a class="nav-link" href="">Api-list</a></li>
+                        {% if user.is_superuser %}
+                            <li class="nav-item"><a class="nav-link" href="/api/">Api-list</a></li>
+                        {% endif %}
                     </ul>
                 </div>
               </div>
