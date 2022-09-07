@@ -1,8 +1,18 @@
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView, LoginView
 
+#import django restframework  router
+from rest_framework import routers
+
 from . import views
+
+# initializing the router
+router = routers.DefaultRouter()
+
+# register each views or route
+router.register(r'Directors', views.DirectorApiView, basename='Directors')
+router.register(r'Movies', views.MovieApiView, basename='Movies')
 
 
 urlpatterns = [
@@ -23,4 +33,7 @@ urlpatterns = [
     path('director/<int:pk>/edit', views.DirectorUpdateView.as_view(), name='director-edit'),
     path('director/<int:pk>/delete', views.DirectorDeleteView.as_view(), name='director-delete'),
     path('director-create/', views.DirectorCreateView.as_view(), name='director-create'),
+    # rest_framework
+    path('api/', include(router.urls)),
+    path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
 ]

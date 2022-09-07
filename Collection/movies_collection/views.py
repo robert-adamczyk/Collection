@@ -1,3 +1,4 @@
+#Django
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -8,7 +9,10 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+#Rest_framework
+from rest_framework import viewsets
 
+from .serializer import MovieSerializer, DirectorSerializer
 from .forms import RegisterForm
 from .models import Director, Movie
 
@@ -106,3 +110,19 @@ class DirectorCreateView(CreateView):
     template_name = 'movies_collection/director_form.html'
     fields = '__all__'
     success_url = reverse_lazy('movie-list')
+
+
+#Rest_api
+class MovieApiView(viewsets.ModelViewSet):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+
+
+class DirectorApiView(viewsets.ModelViewSet):
+    queryset = Movie.objects.all()
+    serializer_class = DirectorSerializer
+
+
+
+
+
